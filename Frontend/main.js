@@ -2,9 +2,9 @@
 let rootes = {
     register :async ()=>{
         try {
-            const {RegisterModels} = await import("./js/api/auth/register.js");
-            const {RegisterControllers} = await import("./js/controllers/auth/register_controoler.js");
-            const {RegisterView} = await import ("./js/views/auth/register_view.js");
+            const {RegisterModels} = await import("./users_app/js/api/auth/register.js");
+            const {RegisterControllers} = await import("./users_app/js/controllers/auth/register_controoler.js");
+            const {RegisterView} = await import ("./users_app/js/views/auth/register_view.js");
 
             const registerModel = new RegisterModels()
             const registerController = new RegisterControllers(registerModel)
@@ -18,9 +18,9 @@ let rootes = {
     },
     login : async ()=>{
             try {
-            const {LoginModels} = await import("./js/api/auth/login_models.js");
-            const {LoginController} = await import("./js/controllers/auth/login_controller.js");
-            const {LoginView} = await import ("./js/views/auth/login_views.js");
+            const {LoginModels} = await import("./users_app/js/api/auth/login_models.js");
+            const {LoginController} = await import("./users_app/js/controllers/auth/login_controller.js");
+            const {LoginView} = await import ("./users_app/js/views/auth/login_views.js");
 
             const loginModel = new LoginModels();
             const loginController = new LoginController(loginModel);
