@@ -1,0 +1,94 @@
+# ==========================================
+# 1. Python & FastAPI (Backend)
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing and linting
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+bin/
+lib/
+develop-eggs/
+eggs/
+.eggs/
+
+# ==========================================
+# 2. Node.js & Frontend (HTML, CSS, JS)
+# ==========================================
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build and Production Folders
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# ==========================================
+# 3. Databases & Cache (MySQL & Redis)
+# ==========================================
+*.sql
+*.sqlite3
+dump.rdb
+.redis/
+
+# ==========================================
+# 4. Secrets & Environment Variables (CRITICAL)
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+Backend/firebase/serviceAccountKey.json
+certs/
+
+# ==========================================
+# 5. Media & User Uploads
+# ==========================================
+# Ignore uploaded media/files to keep the repository clean
+uploads/
+media/
+storage/
+*.epub
+*.pdf
+*.mobi
+
+# ==========================================
+# 6. OS & IDE Specific
+# ==========================================
+# Linux / Ubuntu / macOS
+.DS_Store
+.directory
+.fuse_hidden*
+*~
+*.swp
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains (PyCharm / WebStorm)
+.idea/
+*.iml

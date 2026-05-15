@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Rawyverse</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #0B0E14; /* لون الخلفية الداكن */
+            margin: 0;
+            padding: 0;
+            color: #E2E8F0; /* لون النص الفاتح */
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #151921; /* لون البطاقة */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .header {
+            background-color: #0B0E14;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #FF4B4B; /* خط قرمزي رفيع */
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .header h1 span {
+            color: #FF4B4B; /* كلمة verse بالقرمزي */
+            font-weight: 300;
+        }
+        .content {
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .content h2 {
+            color: #E2E8F0;
+            margin-top: 0;
+        }
+        .content p {
+            color: #94A3B8;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #FF4B4B; /* زر التأكيد */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #e03e3e;
+        }
+        .footer {
+            background-color: #0B0E14;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748B;
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-container">
+    <div class="header">
+        <h1>Rawy<span>verse</span></h1>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to the Universe of Stories, {{ email }}!</h2>
+
+        <p>We are thrilled to have you join <strong>Rawyverse</strong>. Your journey into countless novels and manga is just one step away. Please verify your email address to unlock your personalized library and start reading.</p>
+
+        <a href="{{ verify_link }}" class="btn">Verify My Email</a>
+
+        <p style="margin-top: 30px; font-size: 14px;">If you didn't create an account with us, you can safely ignore this email.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Rawyverse. All rights reserved.</p>
+        <p>Discovering Countless Stories</p>
+    </div>
+</div>
+
+</body>
+</html>

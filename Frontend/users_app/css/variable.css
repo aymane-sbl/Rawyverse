@@ -1,0 +1,18 @@
+:root{
+    --bg-dark :#0B0E14;
+    --surface-dark :#151921;
+    --primary-accent :#FF4B4B;
+    --text-primary :#E2E8F0;
+    --text-seconadry:#94A3B8;
+    /* radius */
+    --radius-sm:8px;
+    --radius-md:16px;
+    --radius-pill:24px;
+    /* Effects & Layout */
+    --card-ratio : 3/2;
+    --backdrop-filter :blur(20px);
+    /* fonts */
+    --bold : 700;
+    --md : 600;
+    
+}

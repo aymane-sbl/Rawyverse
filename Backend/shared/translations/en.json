@@ -1,0 +1,104 @@
+{
+  "auth": {
+    "user_name": {
+      "taken": "This username is already taken.",
+      "not_found": "Username not found.",
+      "invalid_format": "Username can only contain letters, numbers, and underscores.",
+      "too_short": "Username must be at least 3 characters long.",
+      "too_long": "Username must not exceed 20 characters."
+    },
+    "email": {
+      "taken": "This email address is already registered.",
+      "not_found": "Email address not found.",
+      "invalid_format": "Please provide a valid email address.",
+      "not_verified": "Please verify your email address before logging in."
+    },
+    "password": {
+      "incorrect": "Incorrect password.",
+      "too_short": "Password must be at least 8 characters long.",
+      "too_weak": "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
+      "mismatch": "Passwords do not match.",
+      "same_as_old": "New password cannot be the same as the old password."
+    },
+    "links": {
+      "verification_sent": "A verification link has been sent to your email address.",
+      "reset_sent": "A password reset link has been sent to your email address.",
+      "expired": "This link has expired. Please request a new one.",
+      "invalid": "This link is invalid or malformed.",
+      "already_used": "This link has already been used.",
+      "resend_limit_reached": "Too many requests. Please wait before requesting another link."
+    },
+    "token": {
+      "expired": "Your session has expired. Please log in again.",
+      "invalid": "Invalid authentication token.",
+      "missing": "Authentication token is missing.",
+      "revoked": "This token has been revoked."
+    },
+    "general": {
+      "unauthorized": "Not authenticated.",
+      "permission_denied": "You do not have permission to perform this action.",
+      "inactive_user": "This account has been deactivated."
+    },
+    "success": {
+      "registered": "Account created successfully.",
+      "logged_in": "Successfully logged in.",
+      "logged_out": "Successfully logged out.",
+      "password_updated": "Password has been updated successfully.",
+      "email_verified": "Email address has been successfully verified."
+
+    }
+  },
+  "rate_limit": {
+    "general": "Too many requests. Please try again later.",
+    "login_exceeded": "Too many failed login attempts. Please try again in a few minutes.",
+    "signup_exceeded": "Too many account creation attempts. Please try again later.",
+    "emails_exceeded": "Too many email requests. Please wait before asking for a new one.",
+    "ip_blocked": "Your IP has been temporarily blocked due to excessive requests.",
+    "api_quota_exceeded": "API quota exceeded. Please try again later.",
+    "try_again_in_seconds": "Please try again in {seconds} seconds.",
+    "try_again_in_minutes": "Please try again in {minutes} minutes."
+  },
+  "admin": {
+    "permissions": {
+      "denied": "Access denied. Admin privileges required.",
+      "not_an_admin": "You do not have administrator rights.",
+      "action_restricted": "This action is restricted to administrators only."
+    },
+    "users_management": {
+      "verified": "User has been successfully verified.",
+      "suspended": "User account has been suspended.",
+      "activated": "User account has been activated.",
+      "deleted": "User account has been permanently deleted.",
+      "role_updated": "User role has been updated successfully.",
+      "not_found": "The specified user could not be found."
+    },
+    "categories": {
+      "created": "Category created successfully.",
+      "deleted": "Category deleted successfully.",
+      "updated": "Category updated successfully.",
+      "not_found": "Category not found.",
+      "already_exists": "A category with this name already exists.",
+      "in_use": "Cannot delete this category because it has items associated with it."
+    }
+  },
+  "items": {
+    "added": "Added successfully.",
+    "updated": "Updated successfully.",
+    "deleted": "Deleted successfully.",
+    "not_found": "Not found.",
+    "already_exists": "Already exists.",
+    "invalid_data": "Invalid data provided.",
+    "in_use": "Cannot be deleted because it is linked to other records.",
+    "no_results": "No results match your search criteria.",
+    "invalid_id": "Invalid ID format. Please ensure the ID is correct."
+  },
+  "uploads": {
+    "uploaded": "File uploaded successfully.",
+    "deleted": "File deleted successfully.",
+    "too_large": "The file size exceeds the maximum allowed limit.",
+    "invalid_format": "Invalid file format or unsupported extension.",
+    "missing": "No file was provided for upload.",
+    "failed": "Failed to upload the file. Please try again.",
+    "not_found": "File not found."
+  }
+}

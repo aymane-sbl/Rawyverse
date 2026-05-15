@@ -1,0 +1,2 @@
+class ItemsError(Exception):
+    pass
