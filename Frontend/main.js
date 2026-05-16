@@ -30,7 +30,46 @@ let rootes = {
             }catch(error){
                 console.log(error)
             }
+        },
+    home : async()=>{
+        try {
+            const {HomeModels} = await import("./users_app/js/api/books/home_models.js");
+            const {HomeControllers}= await import("./users_app/js/controllers/books/home_Controllers.js");
+            const {HomeView} =  await import("./users_app/js/views/books/home_view.js");
+
+            const homeModels = new HomeModels();
+            const homeControllers = new HomeControllers(homeModels);
+            const homeView =  new HomeView(homeControllers);
+            homeView.init()
+
+
+
+        } catch (error) {
+            console.log(error)
         }
+    },
+    details : async()=>{
+        try {
+            const {DetailsModels} = await import("./users_app/js/api/books/details_models.js");
+            const {DetailsControllers}= await import("./users_app/js/controllers/books/details_controllers.js");
+            const {DetailsView} =  await import("./users_app/js/views/books/details_view.js");
+
+            const detailsModels = new DetailsModels();
+            const detailsControllers = new DetailsControllers(detailsModels);
+            const detailseView =  new DetailsView(detailsControllers);
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            let bookId = urlParams.get("id");
+            
+            detailseView.getItemsById(bookId);
+
+
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 let currentPath = window.location.pathname.toLowerCase();

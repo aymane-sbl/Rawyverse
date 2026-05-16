@@ -10,9 +10,10 @@ async def create_books_table(connection):
                                 `image_url` TEXT,
                                 `file_url` TEXT,
                                 `language` TEXT,
-                                `year` YEAR,
+                                `year` INT,
                                 `pages` INT,
                                 `genres` TEXT,
+                                `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                 FOREIGN KEY (`category_id`) REFERENCES categories(`categories_id`)
                                     ON DELETE CASCADE 
                                     ON UPDATE CASCADE

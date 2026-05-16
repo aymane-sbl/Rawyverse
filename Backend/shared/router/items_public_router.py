@@ -7,7 +7,7 @@ from shared.errors.items_errors import ItemsError
 
 router = APIRouter(prefix="/api/v1/items", tags=["public-items"])
 @router.get("/")
-async def get_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,page:int=Query(default=1,gt=0),limit:int=Query(default=20,ge=5)):
+async def get_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,page:int=Query(default=1,gt=0),limit:int=Query(default=20,gt=1)):
     try :
         services = ManagerPublicItems(connection=connection, redis=redis, lang=lang)
         result = await services.get_items(page=page,limit_items=limit,)

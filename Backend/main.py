@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
     async with app.state.pool.acquire() as connection:
         await init_tables(connection=connection)
     # init language
-    await set_lange_redis(redis=app.state.redis,file="en.json")
+    await set_lange_redis(redis=app.state.redis,file="ar.json")
     # init firebase
     credential = firebase_admin.credentials.Certificate("./firebase/serviceAccountKey.json")
     firebase_admin.initialize_app(credential=credential)
@@ -49,6 +49,7 @@ app = FastAPI(lifespan=lifespan)
 origins = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
+    "https://rawyverse.pages.dev/"
 ]
 
 app.add_middleware(
