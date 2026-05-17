@@ -1,5 +1,6 @@
 import boto3
 import os
+import secrets
 
 from botocore.exceptions import ClientError
 from pathlib import Path
@@ -18,12 +19,13 @@ def aws_config_s3():
     )
     return s3_client
 
-def aws_upload_file_and_full_rename(files,new_name,path,lang):
+def aws_upload_file_and_full_rename(files,path,lang):
     try:
         s3_client = aws_config_s3()
         bucket_url = os.getenv("AWS_CUSTOM_DOMAIN")
         # file
         file_name = Path(files.filename)
+        new_name = f"{secrets.token_urlsafe(12)}.webp"
         new_file_name = file_name.with_name(new_name)
         # uploads
         s3_client.upload_fileobj(files.file, os.getenv("BUCKET_NAME"), f"{path}/{new_file_name}")
@@ -33,13 +35,14 @@ def aws_upload_file_and_full_rename(files,new_name,path,lang):
     return f"{bucket_url}/{path}/{new_file_name}"
 
 
-def aws_upload_file_and_rename_name(files, new_name, path, lang):
+def aws_upload_file_and_rename_name(files,path, lang):
     try:
         s3_client = aws_config_s3()
         bucket_url = os.getenv("AWS_CUSTOM_DOMAIN")
         # file
         file_name = Path(files.filename)
         file_extension=file_name.suffix
+        new_name = secrets.token_urlsafe(12)
         new_file_name = file_name.with_name(f"{new_name}{file_extension}")
         # uploads
         s3_client.upload_fileobj(files.file, os.getenv("BUCKET_NAME"), f"{path}/{new_file_name}")

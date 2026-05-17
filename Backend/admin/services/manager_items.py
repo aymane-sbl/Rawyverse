@@ -1,7 +1,6 @@
 
 import aiomysql
 import json
-from deep_translator import GoogleTranslator
 
 from admin.utils.validator import check_is_admin, check_books_is_exists
 from shared.errors.db_errors import DbError
@@ -24,10 +23,10 @@ class ManagerItems :
         try :
             async with self.connection.cursor() as cursor:
                 # upload image
-                new_name = GoogleTranslator(source="ar",target="en").translate(title)
-                image_link = aws_upload_file_and_full_rename(files=image,new_name=f"{new_name}.webp",path=f"items/images",lang=self.lang)
+
+                image_link = aws_upload_file_and_full_rename(files=image,path=f"items/images",lang=self.lang)
                 # upload file
-                file_link = aws_upload_file_and_rename_name(files=file_url,new_name=f"{new_name}",path=f"items/files",lang=self.lang)
+                file_link = aws_upload_file_and_rename_name(files=file_url,path=f"items/files",lang=self.lang)
                 # genres
                 str_genres_list = json.dumps(genres.split(","))
 

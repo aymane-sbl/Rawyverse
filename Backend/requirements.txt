@@ -6,6 +6,7 @@ anyio==4.13.0
 argon2-cffi==25.1.0
 argon2-cffi-bindings==25.1.0
 async-timeout==5.0.1
+beautifulsoup4==4.14.3
 boto3==1.43.7
 boto3-stubs==1.43.7
 botocore==1.43.7
@@ -88,6 +89,7 @@ safehttpx==0.1.7
 semantic-version==2.10.0
 shellingham==1.5.4
 six==1.17.0
+soupsieve==2.8.3
 starlette==1.0.0
 tomlkit==0.14.0
 tqdm==4.67.3

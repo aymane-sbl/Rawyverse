@@ -28,3 +28,16 @@ async def get_items_by_id(connection : conn_dep,redis:redis_dep,lang:lang_dep,id
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     # except Exception as e:
     #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail="error in server")
+
+@router.get("/search")
+async def search(connection : conn_dep,redis:redis_dep,lang:lang_dep,title:str=Query(...)):
+    try :
+        services = ManagerPublicItems(connection=connection, redis=redis, lang=lang)
+        result = await services.search(title=title)
+        return result
+    except ItemsError as e :
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=str(e))
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    # except Exception as e:
+    #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail="error in server")
