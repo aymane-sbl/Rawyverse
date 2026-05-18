@@ -1,5 +1,7 @@
 
 import uvicorn
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache import FastAPICache
@@ -17,7 +19,7 @@ from users.router import auth
 from admin.router import categories,items
 from shared.router.items_public_router import router as items_public_router
 
-
+load_dotenv(override=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -26,7 +28,7 @@ async def lifespan(app: FastAPI):
     pool =await db.create_pool()
     app.state.pool = pool
 #     init redis
-    redis = redis_as.from_url("redis://127.0.0.1:6379",decode_responses=True)
+    redis = redis_as.from_url(os.getenv("REDIS_URL"),decode_responses=True)
     app.state.redis = redis
 #   init redis cache
     init_redis_cache(redis=redis, redis_backend=RedisBackend ,fast_api_cache=FastAPICache)
@@ -49,6 +51,8 @@ app = FastAPI(lifespan=lifespan)
 origins = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
+    "http://localhost:63343",
+    "http://127.0.0.1:63343",
     "https://rawyverse.pages.dev/"
 ]
 

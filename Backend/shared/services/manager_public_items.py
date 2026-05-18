@@ -4,7 +4,7 @@ import aiomysql
 
 from shared.errors.db_errors import DbError
 from shared.errors.items_errors import ItemsError
-from shared.services.utils.check_title import check_books_is_exists
+from shared.services.utils.items_utils import check_item_is_exists,get_specific_items
 
 
 class ManagerPublicItems:
@@ -69,7 +69,7 @@ class ManagerPublicItems:
             raise DbError(f"error database : {e}")
     # search
     async def search(self,title):
-        if not await check_books_is_exists(title=title ,connection=self.connection):
+        if not await check_item_is_exists(title=title ,connection=self.connection):
             raise ItemsError(self.lang["items"]["no_results"])
         try:
             async with self.connection.cursor() as cursor:
@@ -83,3 +83,15 @@ class ManagerPublicItems:
         except aiomysql.Error as e:
             await self.connection.rollback()
             raise DbError(f"error database : {e}")
+    # get only books
+    async def get_books(self):
+        try:
+          return await get_specific_items(connection=self.connection,category_id=1)
+        except aiomysql.Error as e:
+                raise DbError(f"error database : {e}")
+    # get only novels
+    async def get_novels(self):
+            try:
+               return await  get_specific_items(connection=self.connection, category_id=2)
+            except aiomysql.Error as e:
+                raise DbError(f"error database : {e}")

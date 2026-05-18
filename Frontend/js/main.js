@@ -1,0 +1,139 @@
+
+let rootes = {
+    register :async ()=>{
+        try {
+            const {RegisterModels} = await import("./api/auth/register.js");
+            const {RegisterControllers} = await import("./controllers/auth/register_controoler.js");
+            const {RegisterView} = await import ("./views/auth/register_view.js");
+
+            const registerModel = new RegisterModels()
+            const registerController = new RegisterControllers(registerModel)
+            const registerView = new RegisterView(registerController)
+
+            registerView.init()
+
+        }catch(error){
+            console.log(error)
+        }
+    },
+    login : async ()=>{
+            try {
+            const {LoginModels} = await import("./api/auth/login_models.js");
+            const {LoginController} = await import("./controllers/auth/login_controller.js");
+            const {LoginView} = await import ("./views/auth/login_views.js");
+
+            const loginModel = new LoginModels();
+            const loginController = new LoginController(loginModel);
+            const loginView =  new LoginView(loginController);
+            loginView.init();
+
+            }catch(error){
+                console.log(error)
+            }
+        },
+    home : async()=>{
+        try {
+            const {HomeModels} = await import("./api/users/home_models.js");
+            const {HomeControllers}= await import("./controllers/users/home_Controllers.js");
+            const {HomeView} =  await import("./views/users/home_view.js");
+
+            const homeModels = new HomeModels();
+            const homeControllers = new HomeControllers(homeModels);
+            const homeView =  new HomeView(homeControllers);
+            
+            homeView.init()
+
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    details : async()=>{
+        try {
+            const {DetailsModels} = await import("./api/users/books/details_models.js");
+            const {DetailsControllers}= await import("./controllers/users/books/details_controllers.js");
+            const {DetailsView} =  await import("./views/users/books/details_view.js");
+
+            const detailsModels = new DetailsModels();
+            const detailsControllers = new DetailsControllers(detailsModels);
+            const detailseView =  new DetailsView(detailsControllers);
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            let bookId = urlParams.get("id");
+            
+            detailseView.getItemsById(bookId);
+
+
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    search : async ()=>{
+            try {
+                const {SearchModels} = await import("./api/users/books/search_models.js");
+            const {SearchController}= await import("./controllers/users/books/search_controllers.js");
+            const {SearchView} =  await import("./views/users/books/search_view.js");
+
+            const searchModels = new SearchModels();
+            const searchControllers = new SearchController(searchModels);
+            const searchView =  new SearchView(searchControllers);
+
+            await searchView.search()
+            } catch (error) {
+                 console.log(error)
+            }
+    },
+    novels : async ()=>{
+         try {
+            const {NovelsModels} = await import("./api/users/books/novels_models.js");
+            const {NovelsController}= await import("./controllers/users/books/novels_controller.js");
+            const {NovelsView} =  await import("./views/users/books/novels_view.js");
+
+            const novelsModels = new NovelsModels();
+            const novelsControllers = new NovelsController(novelsModels);
+            const novelsView =  new NovelsView(novelsControllers);
+
+            await novelsView.getNovels()
+            } catch (error) {
+                 console.log(error)
+            }
+    },
+    books : async ()=>{
+         try {
+            const {BooksModels} = await import("./api/users/books/books_models.js");
+            const {BooksController}= await import("./controllers/users/books/books_controller.js");
+            const {BooksView} =  await import("./views/users/books/books_view.js");
+
+            const booksModels = new BooksModels();
+            const booksControllers = new BooksController(booksModels);
+            const booksView =  new BooksView(booksControllers);
+
+            await booksView.getBooks()
+            } catch (error) {
+                 console.log(error)
+            }
+    }
+
+}
+
+
+let currentPath = window.location.pathname.toLowerCase();
+let pageFound = false;
+
+for (let route in rootes){
+    if (currentPath.includes(route)){
+        rootes[route]();
+        pageFound = true;
+        break;
+
+    }
+
+}
+
+if (!pageFound){
+    console.log("page not found");
+}
+

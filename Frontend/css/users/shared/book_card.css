@@ -1,0 +1,21 @@
+/* card */
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.card img{
+    border-radius: var(--radius-md);
+    height: 80%;
+    object-fit: cover;
+
+
+}
+.card h2{
+    margin-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
