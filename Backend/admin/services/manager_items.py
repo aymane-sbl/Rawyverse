@@ -36,7 +36,6 @@ class ManagerItems :
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 """,(title,author,category_id,image_link,language,year,pages,file_link,str_genres_list,synopsis))
                 await self.connection.commit()
-
                 return {
                     "success": True,
                     "msg":self.lang["items"]["added"]
@@ -45,6 +44,24 @@ class ManagerItems :
         except aiomysql.Error as e:
             await self.connection.rollback()
             raise DbError(f"error database : {e}")
+    # delete item
+    async def remove_items(self,title,payload):
+        check_is_admin(payload=payload,lang=self.lang)
+        if not await check_books_is_exists(title=title,connection=self.connection):
+            raise ItemsError(self.lang["items"]["not_found"])
+        try :
+            async with self.connection.cursor() as cursor:
+                await cursor.execute("DELETE FROM `books` WHERE `title` = %s",(title,))
+                await self.connection.commit()
+                return {
+                    "success": True,
+                    "msg":self.lang["items"]["deleted"]
+                }
+        except aiomysql.Error as e:
+            await self.connection.rollback()
+            raise DbError(f"error database : {e}")
+
+
 
 
 

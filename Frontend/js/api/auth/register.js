@@ -1,4 +1,4 @@
-import { initApi } from "../api.js";
+import { initApi } from "../../init_api/api.js";
 export class RegisterModels{
     async register(userName,email,password){
     let endpoints = "/api/v1/register";
@@ -9,6 +9,7 @@ export class RegisterModels{
         };
     let options = {
         method:"POST",
+        credentials : "include",
         headers:{
             "Content-Type": "application/json"
         },

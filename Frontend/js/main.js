@@ -115,6 +115,40 @@ let rootes = {
             } catch (error) {
                  console.log(error)
             }
+    },
+    items : async()=>{
+            const {ItemsModels} = await import("./shared/models/admin/items_models.js");
+            const {ItemsController}= await import("./shared/controller/admin/items_controllers.js");
+            const {ItemsViews} =  await import("./views/admin/items_view.js");
+
+            const itemsModels = new ItemsModels();
+            const itemssControllers = new ItemsController(itemsModels);
+            const itemsView =  new ItemsViews(itemssControllers);
+            itemsView.init()
+            
+
+    },
+    users : async()=>{
+            const {ManagerUsersModels} = await import("./shared/models/admin/manager_users_models.js");
+            const {ManagerUsersController}= await import("./shared/controller/admin/manager_users_controller.js");
+            const {ManagerUsersView} =  await import("./views/admin/manager_users_view.js");
+
+            const models = new ManagerUsersModels();
+            const controller = new ManagerUsersModels(models);
+            const view =  new ManagerUsersView(controller);
+            view.init()
+            
+
+    },
+    category : async ()=>{
+            const {CategorieModels} = await import("./shared/models/admin/categories_models.js");
+            const {CategorieController}= await import("./shared/controller/admin/categories_controller.js");
+            const {CategorieViews} =  await import("./views/admin/categories_views.js");
+
+            const models = new CategorieModels();
+            const controller = new CategorieController(models);
+            const view =  new CategorieViews(controller);
+            view.init()
     }
 
 }

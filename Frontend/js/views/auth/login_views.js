@@ -1,5 +1,7 @@
 import { validator } from "./utils/validator.js";
 import { passwordVisiibility } from "./utils/password_visibility.js";
+import { showAlert } from "../../utils/alert.js";
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
 
 export class LoginView{
     constructor(controller){
@@ -8,7 +10,7 @@ export class LoginView{
     init(){
         this.login()
     }
-    login(){
+    async login(){
         let email = document.querySelector("#email");
         let password= document.querySelector("#password");
         let passwordIcon = document.querySelector("#password-icon");
@@ -28,14 +30,25 @@ export class LoginView{
         // submit btn
         submitBtn.addEventListener("click" ,  async (e)=>{
             e.preventDefault();
+            Swal.fire({
+                allowOutsideClick : false,
+                didOpen(){
+                    Swal.showLoading();
+                }
+            });
             try {
                 let response = await this.controller.login(email.value,password.value);
-                window.location.replace("/users_app/pages/books/home.html");
+                if (response["role"] === "admin"){
+                    window.location.replace("/pages/admin/dashbord.html");
+                }else{
+                    window.location.replace("/pages/users/home.html");
+                }
                 
                 
                 
             } catch (error) {
-                console.log(error.message);
+                showAlert("Error",error.message,"error");
+                            
             }
         })
         

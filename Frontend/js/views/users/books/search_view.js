@@ -1,3 +1,4 @@
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
 export class SearchView{
     constructor(controller){
         this.controller = controller;
@@ -30,7 +31,14 @@ export class SearchView{
                 })
             });
         } catch (error) {
-            console.error(error)
+           let result =await  Swal.fire({
+                "title": "Error",
+                "text":error.message,
+                "icon" : "error"
+            });
+            if (result.isConfirmed){
+                window.location.replace("/pages/users/home.html");
+            }
         }
     }
 }

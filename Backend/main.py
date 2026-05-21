@@ -16,7 +16,7 @@ from shared.middelware.ip_rate_limit import IpRateLimit
 from shared.models.init_tables import init_tables
 from shared.utils.set_lange_redis import set_lange_redis
 from users.router import auth
-from admin.router import categories,items
+from admin.router import categories,items,users
 from shared.router.items_public_router import router as items_public_router
 
 load_dotenv(override=True)
@@ -67,7 +67,11 @@ app.add_middleware(IpRateLimit)
 
 @app.get("/")
 def read_root():
-    return {"welcome": "welcome to my api"}
+    return {
+            "welcome": "welcome to my api",
+            "docs":"/docs",
+            "Github":"https://github.com/aymane-sbl"
+            }
 
 # users
 app.include_router(auth.router)
@@ -76,5 +80,7 @@ app.include_router(auth.router)
 app.include_router(categories.router)
 app.include_router(items.router)
 app.include_router(items_public_router)
+
+app.include_router(users.router)
 if __name__ == "__main__":
     uvicorn.run("main:app",host="127.0.0.1",port=8000,reload=True)

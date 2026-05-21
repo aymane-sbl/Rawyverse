@@ -39,7 +39,7 @@ async def login(login_schemas : LoginSchema,response:Response,redis:redis_dep,co
         result = await services.login(email=login_schemas.email,password=login_schemas.password)
         return result
     except EmailError as error:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=str(error))
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=str(error))
     except PasswordError as error:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=str(error))
     except UsersError as error:

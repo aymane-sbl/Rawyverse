@@ -4,6 +4,7 @@ import os
 
 from shared.dependcices.dependcices import lang_dep
 from shared.dependcices.get_token_cookies import OAuth2PasswordBearerCookies
+
 oauth2_scheme = OAuth2PasswordBearerCookies(tokenUrl="/api/v1/login")
 def decode_token(lang : lang_dep ,token = Depends(oauth2_scheme)):
     try :

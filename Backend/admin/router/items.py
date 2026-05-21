@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File,Form
 from admin.services.manager_items import ManagerItems
+from shared.schemas.items_schmas import AdminItemsSchemas
 
 from shared.dependcices.dependcices import conn_dep, redis_dep, lang_dep
 from shared.dependcices.securite_decode_token import decode_token
@@ -37,7 +38,7 @@ async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload 
             payload=payload)
         return result
     except AdminError as e :
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=str(e))
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=str(e))
     except UploadsError as e :
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=str(e))
     except ItemsError as e :
@@ -47,3 +48,17 @@ async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload 
     # except Exception as e:
     #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail="error in server")
 
+@router.delete("/")
+async def delete_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,admin_items_schemas:AdminItemsSchemas,payload = Depends(decode_token)):
+    try :
+        services = ManagerItems(connection=connection, redis=redis, lang=lang)
+        result = await services.remove_items(title=admin_items_schemas.title,payload=payload)
+        return result
+    except AdminError as e :
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=str(e))
+    except ItemsError as e :
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=str(e))
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
+    # except Exception as e:
+    #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail="error in server")

@@ -26,7 +26,6 @@ export class HomeView{
 
         let main = document.querySelector("main");
         let footer = document.querySelector("footer");
-
         try {
             let quey = new URLSearchParams(window.location.search);
             let currentPage = quey.get("page") || 1
@@ -50,10 +49,10 @@ export class HomeView{
 
                         window.location.href = `/pages/users/books/details.html?id=${e["id"]}`;
                             })
-               
-
-                // footer
-                footer.innerHTML =" "
+                
+                });
+                 // footer
+              
                 for (let i = 1; i <= response["pagination"]["total_pages"]; i++) {
                     let button = document.createElement("button");
                     button.textContent = i;
@@ -66,26 +65,23 @@ export class HomeView{
                         window.location.href = `?page=${i}`
                     })
                 }
-
-                
-                
-                });
              
 
            
             
         }catch (e){
             console.log(e)
-        }
+            
+            }
+        
     }
     search(){
         let searchBtn = document.querySelector("#search-icon");
         let form = document.querySelector("form");
         let searchInput = document.querySelector("#search-input");
-        searchBtn.addEventListener("click",(e)=>{
-            e.preventDefault();
+        searchBtn.addEventListener("click",()=>{
             window.location.href = `/pages/users/books/search.html?title=${searchInput.value}`
-        });
+        })
 
         form.addEventListener("submit",(e)=>{
                 e.preventDefault();

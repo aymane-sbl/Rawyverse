@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <!--file css -->
+    <link rel="stylesheet" href="/css/variable.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin/shared/form.css">
+
+</head>
+<body>
+    <div class="container">
+        <!-- add category -->
+        <section class="form">
+            <h2> إضافة فئة</h2>
+            <form id="form-add-categories" action="">
+                <div class="input-group">
+                    <label for="title-add">عنوان الفئة</label>
+                    <input type="text" id="title-add" name="title" placeholder="عنوان الفئة" required>
+                </div>
+
+                <div class="input-group submit-btn">
+                    <input id="btn-add" type="submit" value="إضافة الفئة" >
+                </div>
+            </form>
+            
+        </section>
+        <!-- delete categories -->
+         <section class="form">
+            <h2> حذف فئة</h2>
+            <form id="form-delete-categories" action="">
+                <div class="input-group">
+                    <label for="title-delete">عنوان الفئة</label>
+                    <input type="text" id="title-delete" name="title" placeholder="عنوان الفئة" required>
+                </div>
+
+                <div class="input-group submit-btn">
+                    <input id="btn-delete" type="submit" value="حذف الفئة" >
+                </div>
+            </form>
+            
+
+
+        </section>
+    </div>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/views/admin/categories_views.js"></script>
+</body>
+</html>

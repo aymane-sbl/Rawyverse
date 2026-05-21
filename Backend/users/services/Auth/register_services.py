@@ -4,7 +4,7 @@ from shared.errors.auth_errors import EmailError,UserNameError
 from shared.errors.db_errors import DbError
 from shared.utils.send_links import send_link
 from shared.utils.users_attempts import check_rate_limit
-from users.utils.validator import check_user_exists,check_email_exists
+from shared.utils.validator import check_user_exists,check_email_exists
 
 
 class RegisterServices:
@@ -27,7 +27,6 @@ class RegisterServices:
             async with self.connection.cursor() as cursor:
                 await cursor.execute("INSERT INTO `users`(`user_name`,`email`,`password`)VALUES(%s,%s,%s)",(user_name,email,hashed_password))
                 await  self.connection.commit()
-                # await send_link(email=email,title="verify_account",redis=self.redis,jinja2=template)
                 background_task.add_task(send_link,email=email,title="verify_account",redis=self.redis,jinja2=template )
 
                 return {

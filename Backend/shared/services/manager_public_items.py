@@ -20,7 +20,7 @@ class ManagerPublicItems:
                     items_count = await cursor.fetchone()
                     # get data
                     skip = (page-1)*limit_items
-                    await cursor.execute("SELECT id,title,author,category_id,image_url,language,year,pages,file_url,genres,synopsis,created_at  FROM `books` LIMIT %s OFFSET %s",(limit_items,skip))
+                    await cursor.execute("SELECT id,title,author,category_id,image_url,language,year,pages,file_url,genres,synopsis,created_at  FROM `books` ORDER BY (`id`) DESC LIMIT %s OFFSET %s",(limit_items,skip))
                     data = await cursor.fetchall()
                     for item in data:
                         for key,value in item.items():

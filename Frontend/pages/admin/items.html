@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <!--file css -->
+    <link rel="stylesheet" href="/css/variable.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin/shared/form.css">
+</head>
+<body>
+    <div class="container">
+        <!-- add items -->
+        <section class="form add-item">
+            <h2>اضافة كتاب</h2>
+            <form action="" id="form-add-item">
+                <div class="input-group">
+                    <label for="title-add">عنوان الكتاب</label>
+                    <input type="text" id="title-add" name="title" placeholder="عنوان الكتاب" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="author">اسم المؤلف</label>
+                    <input type="text" id="author" name="author" placeholder="اسم المؤلف" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="category">الفئة</label>
+                    <select id="category" name="category_id" required>
+                        <option value=""> اختر الفئة</option>
+                        <option value="1">كتاب</option>
+                        <option value="2">رواية</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="language">اللغة</label>
+                   <select name="language" id="language" required>
+                        <option  value="العربية">العربية</option>
+                   </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="pages">عدد الصفحات</label>
+                    <input type="number" id="pages" name="pages" placeholder="عدد الصفحات" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="year">سنة النشر</label>
+                    <input type="number" id="year" name="year" placeholder="سنة النشر" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="genres"> الأنواع</label>
+                    <input type="text" id="genres" name="genres" placeholder="فانتازيا,إثارة" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="cover">صورة الغلاف</label>
+                    <input type="file" id="cover" name="image_url"  placeholder="صورة الغلاف" accept="image/*" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="file">ملف الكتاب</label>
+                    <input type="file" id="file" name="file_url"  placeholder="ملف الكتاب" accept="application/pdf" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="synopsis">الوصف</label>
+                    <textarea id="synopsis" name="synopsis" placeholder="وصف الكتاب" required></textarea>
+                </div>
+
+                <div class="input-group submit-btn">
+                    <input id="btn-add" type="submit" value="اضافة الكتاب" >
+                </div>
+            </form>
+            
+        </section>
+        <!-- delete items -->
+         <section class="form">
+            <h2> حذف كتاب</h2>
+            <form action="" id="form-delete-item">
+                <div class="input-group">
+                    <label for="title-delete">عنوان الكتاب</label>
+                    <input type="text" id="title-delete" name="title" placeholder="عنوان الكتاب" required>
+                </div>
+
+                <div class="input-group submit-btn">
+                    <input id="btn-delete" type="submit" value="حذف الكتاب" >
+                </div>
+            </form>
+            
+
+
+        </section>
+    </div>
+
+    <script type="module" src="/js/views/admin/items_view.js"></script>
+    // <script type="module" src="/js/main.js"></script>
+</body>
+</html>

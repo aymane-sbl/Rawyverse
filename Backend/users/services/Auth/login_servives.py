@@ -9,7 +9,7 @@ from shared.errors.db_errors import DbError
 from shared.utils.set_token_cookies import create_token_cookies
 from shared.utils.users_attempts import check_rate_limit
 
-from users.utils.validator import check_email_exists
+from shared.utils.validator import check_email_exists
 
 
 
@@ -34,6 +34,7 @@ class LoginServices:
                 return {
                     "success":True,
                     "message" : self.language["auth"]["success"]["logged_in"],
+                    "role":data["role"]
                 }
 
         except VerifyMismatchError :

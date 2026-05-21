@@ -1,4 +1,4 @@
-import { initApi } from "../../api.js";
+import { initApi } from "../../../init_api/api.js";
 
 export class BooksModels{
 
