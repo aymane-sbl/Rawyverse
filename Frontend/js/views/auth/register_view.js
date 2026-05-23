@@ -7,10 +7,10 @@ import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
 
 export class RegisterView{
     constructor(controllers){
-        this.controllers = controllers
+        this.controllers = controllers;
     }
     init(){
-        this.register()
+        this.register();
     }
     register(){
         let userName=document.querySelector("#username");

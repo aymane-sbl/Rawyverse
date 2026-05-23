@@ -1,4 +1,7 @@
+from _testcapi import awaitType
 from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File,Form
+from redis.commands.search import result
+
 from admin.services.manager_items import ManagerItems
 from shared.schemas.items_schmas import AdminItemsSchemas
 
@@ -62,3 +65,31 @@ async def delete_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,admin
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
     # except Exception as e:
     #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail="error in server")
+
+@router.get("/length-table")
+async def length_table(connection : conn_dep,redis:redis_dep,lang:lang_dep):
+    try:
+        services = ManagerItems(connection=connection, redis=redis, lang=lang)
+        result =await services.length_table()
+        return result
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
+
+# lenght books
+@router.get("/length-books")
+async def length_books(connection : conn_dep,redis:redis_dep,lang:lang_dep):
+    try:
+        services = ManagerItems(connection=connection, redis=redis, lang=lang)
+        result =await services.get_length_books()
+        return result
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
+# lenght Novels
+@router.get("/length-novels")
+async def length_novels(connection : conn_dep,redis:redis_dep,lang:lang_dep):
+    try:
+        services = ManagerItems(connection=connection, redis=redis, lang=lang)
+        result =await services.get_length_novels()
+        return result
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))

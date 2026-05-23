@@ -15,7 +15,7 @@ from shared.database.redis_cache import init_redis_cache
 from shared.middelware.ip_rate_limit import IpRateLimit
 from shared.models.init_tables import init_tables
 from shared.utils.set_lange_redis import set_lange_redis
-from users.router import auth
+from users.router import auth, profile
 from admin.router import categories,items,users
 from shared.router.items_public_router import router as items_public_router
 
@@ -75,6 +75,7 @@ def read_root():
 
 # users
 app.include_router(auth.router)
+app.include_router(profile.router)
 
 # admin
 app.include_router(categories.router)

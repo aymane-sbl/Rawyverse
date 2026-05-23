@@ -1,5 +1,6 @@
 import aiomysql
 
+from admin.utils.get_lenght_table import get_lenght_table
 from admin.utils.validator import check_is_admin
 
 from shared.errors.db_errors import DbError
@@ -43,4 +44,11 @@ class ManagerUsersService:
         except aiomysql.Error as e:
             await self.connectin.rollback()
             raise DbError(f"error : {e}")
+
+    async def length_table(self):
+        try:
+            return await get_lenght_table(connection=self.connectin,table="users",column="id")
+        except aiomysql.Error as e:
+            await self.connectin.rollback()
+            raise DbError(f"error database : {e}")
 

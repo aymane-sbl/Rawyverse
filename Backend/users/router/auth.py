@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status, Response, Query,BackgroundTasks
+from fastapi import APIRouter, HTTPException, status, Response, Query,BackgroundTasks,Request
 from fastapi.templating import Jinja2Templates
 
 from shared.dependcices.dependcices import conn_dep,redis_dep,lang_dep
@@ -67,17 +67,11 @@ async def google_login(response:Response,login_google : LoginGoogle ,redis:redis
     #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(error))
     
 @router.get("/verify_account")
-async def verify_link(redis:redis_dep,connection:conn_dep,lang:lang_dep,token=Query(...)):
+async def verify_link(redis:redis_dep,connection:conn_dep,lang:lang_dep,request:Request,token=Query(...)):
     try :
         services = RegisterServices(connection=connection, redis=redis, language=lang)
-        result =  await services.verify_account(token=token)
+        result =  await services.verify_account(token=token,template=templates,request=request)
         return result
-    except EmailError as error:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=str(error))
-    except UsersError as error:
-        raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS,detail=str(error))
-    except DbError as error:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(error))
     except Exception as error:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(error))
 

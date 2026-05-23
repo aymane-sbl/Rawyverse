@@ -28,3 +28,12 @@ async def delete_users(connection :conn_dep,redis:redis_dep,lang:lang_dep,admin_
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail= str(e))
     except DbError as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail= str(e))
+
+@router.get("/length-table")
+async def length_table(connection : conn_dep,redis:redis_dep,lang:lang_dep):
+    try:
+        services = ManagerUsersService(connectin=connection, redis=redis, lang=lang)
+        result =await services.length_table()
+        return result
+    except DbError as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))

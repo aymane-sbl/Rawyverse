@@ -1,5 +1,6 @@
 
 import Swal  from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
+import {showAlert} from "../../utils/alert.js"
 
 export class CategorieViews{
     constructor (controller){
@@ -22,7 +23,7 @@ export class CategorieViews{
                     icon : "success"
                 })
             }catch(error){
-                throw new Error(error)
+                 showAlert("error",error.message,"error");
             }
         })
     }
@@ -40,7 +41,7 @@ export class CategorieViews{
                     icon : "success"
                 })
             }catch(error){
-                throw new Error(error)
+                showAlert("error",error.message,"error");
             }
         })
     }

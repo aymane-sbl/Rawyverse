@@ -10,6 +10,7 @@ class Database:
             password =os.getenv("PASSWORD"),
             port = int(os.getenv("DB_PORT")) ,
             db=os.getenv("DB"),
+            autocommit = True,
             minsize=5,
             maxsize=32,
             cursorclass=aiomysql.DictCursor,

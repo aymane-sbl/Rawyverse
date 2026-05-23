@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- file css -->
+    <link rel="stylesheet" href="/css/variable.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin/shared/form.css">
+    <link rel="stylesheet" href="/css/loading.css">
+
+    <!-- icons -->
+    <link rel="shortcut icon" href="/assets/icons/logo.ico" type="image/x-icon">
+</head>
+<body>
+        <!-- loader -->
+    <div id="loader"></div>
+   <div class="container">
+
+        <section class="form">
+            <h2> الملف الشخصي</h2>
+            <form action="" id="form-add-item">
+                <div class="input-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" name="userName" placeholder="مثال: name12"  readonly  required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">عنوان البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" placeholder="عنوان البريد الإلكتروني" readonly required>
+                </div>
+
+
+                <!-- <div class="input-group submit-btn">
+                    <input id="btn-add" type="submit" value="تعديل" >
+                </div> -->
+            </form>
+            
+        </section>
+    </div>
+    <script type="module" src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import aiomysql
 from argon2 import PasswordHasher
 from shared.errors.auth_errors import EmailError,UserNameError
@@ -6,7 +8,7 @@ from shared.utils.send_links import send_link
 from shared.utils.users_attempts import check_rate_limit
 from shared.utils.validator import check_user_exists,check_email_exists
 
-
+load_dotenv(override=True)
 class RegisterServices:
     def __init__(self,connection,redis,language):
         self.connection = connection
@@ -40,23 +42,37 @@ class RegisterServices:
             raise DbError(f"database error : {str(e)}")
 
     # Verify account
-    async def verify_account(self,token):
+    async def verify_account(self,token,template,request):
         try :
             redis_key = f"auth:verify_account:{token}"
             email = await self.redis.get(redis_key)
             await check_rate_limit(identifier=email,action_type="verify_account",number_attempts=3,time=60*5,error_content=self.language["rate_limit"]["general"],redis=self.redis)
 
             if not await check_email_exists(email=email,connection=self.connection):
-                raise EmailError(self.language["auth"]["links"]["invalid"])
-
+                # raise EmailError(self.language["auth"]["links"]["invalid"])
+                return template.TemplateResponse(
+                    request=request,
+                    name="verfication_account_template.html",
+                    context={
+                        "is_success": False,
+                        "message": self.language["auth"]["links"]["invalid"],
+                        "domain" : os.getenv("DOMAIN")
+                    }
+                )
             async with self.connection.cursor() as cursor:
                 await  cursor.execute("UPDATE `users` SET `is_verified` = TRUE WHERE `email` = %s",(email,))
                 await self.connection.commit()
                 await self.redis.delete(redis_key)
-                return {
-                    "success": True,
-                    "message" : self.language["auth"]["success"]["email_verified"],
-                }
+                return template.TemplateResponse(
+                    request=request,
+                    name="verfication_account_template.html",
+                    context={
+                        "is_success": True,
+                        "message":self.language["auth"]["success"]["email_verified"],
+                        "domain": os.getenv("DOMAIN")
+                    }
+                )
+
 
         except aiomysql.Error as e:
             await  self.connection.rollback()

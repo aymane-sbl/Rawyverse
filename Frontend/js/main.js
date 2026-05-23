@@ -41,7 +41,7 @@ let rootes = {
             const homeControllers = new HomeControllers(homeModels);
             const homeView =  new HomeView(homeControllers);
             
-            homeView.init()
+            await homeView.init()
 
 
 
@@ -134,7 +134,7 @@ let rootes = {
             const {ManagerUsersView} =  await import("./views/admin/manager_users_view.js");
 
             const models = new ManagerUsersModels();
-            const controller = new ManagerUsersModels(models);
+            const controller = new ManagerUsersController(models);
             const view =  new ManagerUsersView(controller);
             view.init()
             
@@ -149,25 +149,42 @@ let rootes = {
             const controller = new CategorieController(models);
             const view =  new CategorieViews(controller);
             view.init()
+    },
+    dashbord : async ()=>{
+        // users
+            const {ManagerUsersModels} = await import("./shared/models/admin/manager_users_models.js");
+            const {ManagerUsersController}= await import("./shared/controller/admin/manager_users_controller.js");
+            const uModels = new ManagerUsersModels();
+            const uController = new ManagerUsersController(uModels);
+        // items
+            const {ItemsModels} = await import("./shared/models/admin/items_models.js");
+            const {ItemsController}= await import("./shared/controller/admin/items_controllers.js");
+            const itemsModels = new ItemsModels();
+            const itemsControllers = new ItemsController(itemsModels);
+        // dashborad
+        let {DashbordsViews} = await import("./views/admin/dashboard_views.js");
+        let dashboardViews =new DashbordsViews(itemsControllers,uController);
+        await dashboardViews.Dashbord()
+    },
+    profile : async ()=>{
+            const {ProfileModels} = await import("./api/users/profile/profile_models.js");
+            const {ProfileControllers}= await import("./controllers/users/profile/profile_controller.js");
+            const {ProfileViews} =  await import("./views/users/profile/profile_views.js");
+
+            const models = new ProfileModels();
+            const controller = new ProfileControllers(models);
+            const view =  new ProfileViews(controller);
+            await view.init()
     }
 
 }
 
 
 let currentPath = window.location.pathname.toLowerCase();
-let pageFound = false;
-
-for (let route in rootes){
-    if (currentPath.includes(route)){
-        rootes[route]();
-        pageFound = true;
-        break;
-
-    }
-
-}
-
-if (!pageFound){
-    console.log("page not found");
+let pageName = currentPath.split("/").pop().replace(".html","");
+if (rootes[pageName]){
+    rootes[pageName]();
+}else {
+    console.log(`Page '${pageName}' not found in router (404)`);
 }
 

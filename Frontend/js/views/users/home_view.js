@@ -12,6 +12,7 @@ export class HomeView{
     async getItems(){
         let btnMenu = document.querySelector("#menu");
         let isClicked = false;
+        let profile = document.querySelector(".profile");
         
         btnMenu.addEventListener("click",()=>{
             isClicked = !isClicked;
@@ -24,6 +25,11 @@ export class HomeView{
             }
         });
 
+        // profile
+        profile.addEventListener("click",(e)=>{
+            e.preventDefault();
+            window.location.href = "/pages/users/profile/profile.html";
+        })
         let main = document.querySelector("main");
         let footer = document.querySelector("footer");
         try {

@@ -5,4 +5,7 @@ export class LoginController{
     async login(email,password){
         return await this.model.login(email,password);
     }
+    async loginWithGoogle(token){
+        return await this.model.loginWithGoogle(token);
+    }
 }

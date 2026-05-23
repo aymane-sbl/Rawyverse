@@ -1,4 +1,5 @@
 import {initApi} from "../../../init_api/api.js"
+import { fetchData } from "../../../utils/fetchj_data.js";
 export class ItemsModels{
     async addItems(form){
         const endponits = "/api/v1/admin/items/";
@@ -29,5 +30,20 @@ export class ItemsModels{
 
         let response = await initApi(endpoints,options);
         return response
+    }
+    // get total items 
+    async totalItems(){
+        let endpoints = "/api/v1/admin/items/length-table";
+        return await fetchData(endpoints);
+    }
+     // total books
+    async totalBooks(){
+        const endpoints = "/api/v1/admin/items/length-books";
+        return await fetchData(endpoints);
+    }
+     // total books
+    async totalNovels(){
+        const endpoints = "/api/v1/admin/items/length-novels";
+        return await fetchData(endpoints);
     }
 }

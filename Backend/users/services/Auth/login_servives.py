@@ -54,15 +54,18 @@ class LoginServices:
 
             async with self.connection.cursor() as cursor:
                 if not user_exists:
-                    await cursor.execute("INSERT INTO `users`(`email`)VALUES(%s)",(email,))
+                    await cursor.execute("INSERT INTO `users`(`email`,`is_verified`)VALUES(%s,true)",(email,))
                     await self.connection.commit()
                 else :
                     await cursor.execute("UPDATE `users` SET `is_verified` = TRUE WHERE `email` = %s", (email,))
                     await self.connection.commit()
                 # create token
-                create_token_cookies(email=email, response=self.response)
+                await cursor.execute("SELECT `role` FROM `users` WHERE `email` = %s", (email,))
+                data = await cursor.fetchone()
+                create_token_cookies(email=email, response=self.response, role=data["role"])
                 return {
                     "success": True,
+                    "role":data["role"],
                     "message": self.language["auth"]["success"]["logged_in"],
                 }
         except auth.InvalidIdTokenError :

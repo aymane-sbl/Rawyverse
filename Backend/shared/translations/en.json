@@ -31,7 +31,7 @@
     "token": {
       "expired": "Your session has expired. Please log in again.",
       "invalid": "Invalid authentication token.",
-      "missing": "Authentication token is missing.",
+      "missing": "Authentication token is missing. Please log in to continue.",
       "revoked": "This token has been revoked."
     },
     "general": {
@@ -80,6 +80,14 @@
       "already_exists": "A category with this name already exists.",
       "in_use": "Cannot delete this category because it has items associated with it."
     }
+  },
+  "users": {
+    "not_found": "User not found.",
+    "account_not_found": "This account does not exist or may have been deleted.",
+    "id_not_found": "The requested user ID was not found. Please check and try again.",
+    "profile_updated": "User profile updated successfully.",
+    "profile_fetched": "User profile retrieved successfully.",
+    "already_exists": "A user with these details already exists."
   },
   "items": {
     "added": "Added successfully.",

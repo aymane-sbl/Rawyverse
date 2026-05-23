@@ -15,4 +15,21 @@ export class LoginModels{
         let response = await initApi(endpoints,options);
         return  response
     }
+    async loginWithGoogle(token){
+        const endpoints = "/api/v1/google-login";
+        let data = {
+            "token":token
+        }
+        let options = {
+            method : "POST",
+            credentials : "include",
+            headers : {
+                "Content-type":"application/json",
+            },
+            body : JSON.stringify(data)
+        }
+
+        let response = initApi(endpoints,options);
+        return response;
+    }
 }

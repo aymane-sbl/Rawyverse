@@ -1,5 +1,7 @@
 import {initApi} from "../../../init_api/api.js"
+import { fetchData } from "../../../utils/fetchj_data.js";
 export class ManagerUsersModels{
+    
     async deleteUsers(email){
         const endpoints = "/api/v1/admin/manager-users/";
         let data = {
@@ -18,5 +20,9 @@ export class ManagerUsersModels{
         return response
 
 
+    }
+    async getLengthUsers(){
+        const endpoints = "/api/v1/admin/manager-users/length-table";
+        return await fetchData(endpoints);
     }
 }

@@ -2,6 +2,7 @@
 import aiomysql
 import json
 
+from admin.utils.get_lenght_table import get_lenght_table
 from admin.utils.validator import check_is_admin, check_books_is_exists
 from shared.errors.db_errors import DbError
 from shared.errors.items_errors import ItemsError
@@ -15,6 +16,18 @@ class ManagerItems :
         self.connection = connection
         self.redis = redis
         self.lang = lang
+
+
+    async def __get_specific_item(self,category_id):
+        async with self.connection.cursor() as cursor:
+            await cursor.execute(
+                "SELECT COUNT(`id`) as count FROM `books` WHERE `category_id` = %s", (category_id,))
+            data = await cursor.fetchone()
+            return {
+                "success": True,
+                "length": data["count"]
+            }
+
     #    add items
     async def add_items(self,payload,title,author,category_id,image,language,year,pages,file_url,genres,synopsis):
         check_is_admin(payload=payload,lang=self.lang)
@@ -57,6 +70,29 @@ class ManagerItems :
                     "success": True,
                     "msg":self.lang["items"]["deleted"]
                 }
+        except aiomysql.Error as e:
+            await self.connection.rollback()
+            raise DbError(f"error database : {e}")
+
+    async def length_table(self):
+        try:
+            return await get_lenght_table(connection=self.connection,table="books",column="id")
+        except aiomysql.Error as e:
+            await self.connection.rollback()
+            raise DbError(f"error database : {e}")
+
+
+        #     get length books
+    async def get_length_books(self):
+        try:
+            return await self.__get_specific_item(category_id=1)
+        except aiomysql.Error as e:
+            await self.connection.rollback()
+            raise DbError(f"error database : {e}")
+
+    async def get_length_novels(self):
+        try:
+            return await self.__get_specific_item(category_id=2)
         except aiomysql.Error as e:
             await self.connection.rollback()
             raise DbError(f"error database : {e}")

@@ -1,4 +1,5 @@
 import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
+import {showAlert} from "../../utils/alert.js"
 export class ManagerUsersView{
     constructor(controller){
         this.controller = controller;
@@ -20,7 +21,8 @@ export class ManagerUsersView{
                 })
 
             }catch(error){
-                console.log(error);
+                showAlert("error",error.message,"error");
+
             }
         })
     }

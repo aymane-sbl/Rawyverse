@@ -12,6 +12,7 @@ class ManagerPublicItems:
         self.connection = connection
         self.redis = redis
         self.lang = lang
+
     async def get_items(self,page,limit_items):
         try :
             async with self.connection.cursor() as cursor:
@@ -95,3 +96,5 @@ class ManagerPublicItems:
                return await  get_specific_items(connection=self.connection, category_id=2)
             except aiomysql.Error as e:
                 raise DbError(f"error database : {e}")
+
+
