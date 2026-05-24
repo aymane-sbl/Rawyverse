@@ -87,7 +87,8 @@
     "id_not_found": "The requested user ID was not found. Please check and try again.",
     "profile_updated": "User profile updated successfully.",
     "profile_fetched": "User profile retrieved successfully.",
-    "already_exists": "A user with these details already exists."
+    "already_exists": "A user with these details already exists.",
+    "registered_via_google": "This account is registered via Google. Please log in using Google."
   },
   "items": {
     "added": "Added successfully.",

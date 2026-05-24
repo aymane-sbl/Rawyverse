@@ -18,6 +18,7 @@ export class RegisterView{
         let password= document.querySelector("#password");
         let passwordIcon = document.querySelector("#password-icon");
         let submitBtn = document.querySelector("input[type='submit']");
+        let form = document.querySelector("form");
 
         // password visibility
         passwordVisiibility(password,passwordIcon);
@@ -35,7 +36,7 @@ export class RegisterView{
         })
 
         // submit
-        submitBtn.addEventListener("click",async (e)=>{
+        form.addEventListener("submit",async (e)=>{
             e.preventDefault();
             Swal.fire({
                             allowOutsideClick : false,

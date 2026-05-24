@@ -37,7 +37,7 @@ export class SearchView{
                 "icon" : "error"
             });
             if (result.isConfirmed){
-                window.location.replace("/pages/users/home.html");
+                window.location.replace("/index.html");
             }
         }
     }

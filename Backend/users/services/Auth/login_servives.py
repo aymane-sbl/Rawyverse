@@ -6,6 +6,7 @@ from firebase_admin.exceptions import FirebaseError
 
 from shared.errors.auth_errors import EmailError, PasswordError, TokenError, FireBaseEr
 from shared.errors.db_errors import DbError
+from shared.errors.users_errors import UsersError
 from shared.utils.set_token_cookies import create_token_cookies
 from shared.utils.users_attempts import check_rate_limit
 
@@ -28,6 +29,8 @@ class LoginServices:
             async with self.connection.cursor() as cursor:
                 await cursor.execute("SELECT `password`,`role` FROM `users` WHERE `email`=%s",(email,))
                 data = await cursor.fetchone()
+                if not data["password"]:
+                    raise UsersError(self.language["users"]["registered_via_google"])
                 self.password_hasher.verify(data["password"],password)
                 # create token
                 create_token_cookies(email=email,role=data["role"],response=self.response)

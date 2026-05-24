@@ -182,9 +182,12 @@ let rootes = {
 
 let currentPath = window.location.pathname.toLowerCase();
 let pageName = currentPath.split("/").pop().replace(".html","");
+if (pageName === "" || pageName == "index"){
+    pageName = "home";
+}
 if (rootes[pageName]){
     rootes[pageName]();
 }else {
-    console.log(`Page '${pageName}' not found in router (404)`);
+    window.location.replace("/pages/not_found.html")
 }
 

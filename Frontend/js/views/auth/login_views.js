@@ -18,6 +18,7 @@ export class LoginView{
         let password= document.querySelector("#password");
         let passwordIcon = document.querySelector("#password-icon");
         let submitBtn = document.querySelector("input[type='submit']");
+        let form = document.querySelector("form");
 
          // password visibility
         passwordVisiibility(password,passwordIcon)
@@ -31,7 +32,7 @@ export class LoginView{
                 })
 
         // submit btn
-        submitBtn.addEventListener("click" ,  async (e)=>{
+        form.addEventListener("submit" ,  async (e)=>{
             e.preventDefault();
             Swal.fire({
                 allowOutsideClick : false,
@@ -44,7 +45,7 @@ export class LoginView{
                 if (response["role"] === "admin"){
                     window.location.replace("/pages/admin/dashbord.html");
                 }else{
-                    window.location.replace("/pages/users/home.html");
+                    window.location.replace("/index.html");
                 }
                 
                 
@@ -81,7 +82,7 @@ export class LoginView{
                         window.location.replace("/pages/admin/dashbord.html");
                         console.log(result)
                     }else{
-                            window.location.replace("/pages/users/home.html");
+                            window.location.replace("/index.html");
                         console.log(result)
 
                         }
