@@ -6,6 +6,7 @@ from shared.errors.auth_errors import UserNameError, EmailError, PasswordError, 
 from shared.errors.users_errors import UsersError
 from shared.errors.db_errors import DbError
 from users.services.Auth.login_servives import LoginServices
+from users.services.Auth.logout_services import LogoutServices
 from users.services.Auth.register_services import RegisterServices
 from users.shemas.auth_schemas import RegisterSchema, LoginSchema, LoginGoogle
 
@@ -74,6 +75,19 @@ async def verify_link(redis:redis_dep,connection:conn_dep,lang:lang_dep,request:
         return result
     except Exception as error:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(error))
+
+@router.post("/logout")
+async def logout(connection:conn_dep,lang:lang_dep,redis:redis_dep,response : Response):
+    try :
+        services = LogoutServices(connection=connection,redis= redis,lang=lang)
+        result = await services.logout(response=response)
+        return result
+    except UsersError as error:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=str(error))
+    # except Exception as error:
+    #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(error))
+
+
 
 
 

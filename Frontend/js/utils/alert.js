@@ -7,3 +7,12 @@ export async function showAlert(title,message,icon){
                         });
     return result
 }
+
+export function showAlertLoading(){
+     Swal.fire({
+                allowOutsideClick : false,
+                didOpen(){
+                    Swal.showLoading();
+                }
+            });
+}

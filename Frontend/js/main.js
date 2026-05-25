@@ -161,20 +161,43 @@ let rootes = {
             const {ItemsController}= await import("./shared/controller/admin/items_controllers.js");
             const itemsModels = new ItemsModels();
             const itemsControllers = new ItemsController(itemsModels);
+         // logout
+            const {LogoutModels} = await import("./shared/models/auth/logout_models.js");
+            const {LogoutController}= await import("./shared/controller/auth/logout_controllers.js");
+            const {LogoutViews} =  await import("./shared/view/auth/logout_views.js");
+
         // dashborad
         let {DashbordsViews} = await import("./views/admin/dashboard_views.js");
         let dashboardViews =new DashbordsViews(itemsControllers,uController);
-        await dashboardViews.Dashbord()
+        await dashboardViews.Dashbord();
+
+         // logout
+        let logout_model = new LogoutModels();
+        let logout_controller = new LogoutController(logout_model);
+        let logout_views = new LogoutViews(logout_controller);
+
+            await logout_views.logout();
     },
     profile : async ()=>{
+        // profile
             const {ProfileModels} = await import("./api/users/profile/profile_models.js");
             const {ProfileControllers}= await import("./controllers/users/profile/profile_controller.js");
             const {ProfileViews} =  await import("./views/users/profile/profile_views.js");
+        // logout
+            const {LogoutModels} = await import("./shared/models/auth/logout_models.js");
+            const {LogoutController}= await import("./shared/controller/auth/logout_controllers.js");
+            const {LogoutViews} =  await import("./shared/view/auth/logout_views.js");
 
             const models = new ProfileModels();
             const controller = new ProfileControllers(models);
             const view =  new ProfileViews(controller);
             await view.init()
+        // logout
+            let logout_model = new LogoutModels();
+            let logout_controller = new LogoutController(logout_model);
+            let logout_views = new LogoutViews(logout_controller);
+
+            await logout_views.logout();
     }
 
 }

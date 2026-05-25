@@ -49,6 +49,7 @@ class ManagerItems :
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 """,(title,author,category_id,image_link,language,year,pages,file_link,str_genres_list,synopsis))
                 await self.connection.commit()
+
                 return {
                     "success": True,
                     "msg":self.lang["items"]["added"]

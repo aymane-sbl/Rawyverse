@@ -1,6 +1,7 @@
+
 from _testcapi import awaitType
 from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File,Form
-from redis.commands.search import result
+from fastapi_cache import  FastAPICache
 
 from admin.services.manager_items import ManagerItems
 from shared.schemas.items_schmas import AdminItemsSchemas
@@ -15,7 +16,8 @@ from shared.errors.uploads_errors import UploadsError
 router = APIRouter(prefix="/api/v1/admin/items", tags=["Admin-items"])
 
 @router.post("/",status_code=status.HTTP_201_CREATED)
-async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload = Depends(decode_token),title: str = Form(...),
+async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload = Depends(decode_token),
+    title: str = Form(...),
     author: str = Form(...),
     synopsis: str = Form(...),
     category_id: int = Form(...),
@@ -24,7 +26,9 @@ async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload 
     pages: int = Form(...),
     genres: str = Form(...,description="action, drama, fantasy"),
     image_url: UploadFile = File(...),
-    file_url: UploadFile = File(...), ):
+    file_url: UploadFile = File(...),
+
+                    ):
     try :
         services = ManagerItems(connection=connection, redis=redis, lang=lang)
         result = await services.add_items(
@@ -38,7 +42,10 @@ async def add_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,payload 
             genres=genres,
             image=image_url,
             file_url=file_url,
-            payload=payload)
+            payload=payload,
+        )
+        if result.get("success"):
+            await FastAPICache.clear(namespace="get_items")
         return result
     except AdminError as e :
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=str(e))
@@ -56,6 +63,8 @@ async def delete_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,admin
     try :
         services = ManagerItems(connection=connection, redis=redis, lang=lang)
         result = await services.remove_items(title=admin_items_schemas.title,payload=payload)
+        if result.get("success"):
+            await FastAPICache.clear(namespace="get_items")
         return result
     except AdminError as e :
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=str(e))

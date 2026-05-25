@@ -1,6 +1,6 @@
 
 import Swal  from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
-import {showAlert} from "../../utils/alert.js"
+import {showAlert,showAlertLoading} from "../../utils/alert.js"
 
 export class CategorieViews{
     constructor (controller){
@@ -15,6 +15,7 @@ export class CategorieViews{
         let form = document.getElementById("form-add-categories");
         form.addEventListener("submit",async (e)=>{
             e.preventDefault();
+            showAlertLoading();
             try{
                 let response = await this.controller.addCategories(nameInput.value);
                 Swal.fire({
@@ -33,6 +34,7 @@ export class CategorieViews{
         let form = document.getElementById("form-delete-categories");
         form.addEventListener("submit",async (e)=>{
             e.preventDefault();
+            showAlertLoading()
             try{
                 let response = await this.controller.deleteCategories(nameInput.value);
                 Swal.fire({

@@ -34,6 +34,12 @@
       "missing": "Authentication token is missing. Please log in to continue.",
       "revoked": "This token has been revoked."
     },
+    "logout": {
+      "success": "Successfully logged out.",
+      "all_devices_success": "Successfully logged out from all devices.",
+      "already_logged_out": "You are already logged out.",
+      "failed": "Failed to log out. Please try again."
+    },
     "general": {
       "unauthorized": "Not authenticated.",
       "permission_denied": "You do not have permission to perform this action.",

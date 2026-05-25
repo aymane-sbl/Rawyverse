@@ -1,5 +1,5 @@
 from fastapi import APIRouter,Depends, HTTPException,Query,Path,status
-
+from fastapi_cache.decorator import cache
 from shared.services.manager_public_items import ManagerPublicItems
 from shared.dependcices.dependcices import conn_dep, redis_dep, lang_dep
 from shared.errors.db_errors import DbError
@@ -7,6 +7,7 @@ from shared.errors.items_errors import ItemsError
 
 router = APIRouter(prefix="/api/v1/items", tags=["public-items"])
 @router.get("/")
+@cache(expire=60*60*24,namespace="get_items")
 async def get_items(connection : conn_dep,redis:redis_dep,lang:lang_dep,page:int=Query(default=1,gt=0),limit:int=Query(default=20,gt=1)):
     try :
         services = ManagerPublicItems(connection=connection, redis=redis, lang=lang)

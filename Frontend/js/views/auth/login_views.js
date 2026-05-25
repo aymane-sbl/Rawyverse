@@ -77,6 +77,12 @@ export class LoginView{
                 let result = await signInWithPopup(auth,provider);
                 let token = await result.user.getIdToken();
                 try {
+                    Swal.fire({
+                            allowOutsideClick : false,
+                            didOpen(){
+                                Swal.showLoading();
+                            }
+                        });
                     let response = await this.controller.loginWithGoogle(token);
                     if (response["role"] === "admin"){
                         window.location.replace("/pages/admin/dashbord.html");

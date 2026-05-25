@@ -1,5 +1,5 @@
 import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
-import {showAlert} from "../../utils/alert.js"
+import {showAlert,showAlertLoading} from "../../utils/alert.js"
 export class ManagerUsersView{
     constructor(controller){
         this.controller = controller;
@@ -11,7 +11,8 @@ export class ManagerUsersView{
         let emailInput = document.getElementById("email");
         let form = document.getElementById("form-delete-users");
         form.addEventListener("submit",async (e) => {
-            e.preventDefault()
+            e.preventDefault();
+            showAlertLoading();
             try{
                 let response = await this.controller.deleteUsers(emailInput.value);
                 Swal.fire({

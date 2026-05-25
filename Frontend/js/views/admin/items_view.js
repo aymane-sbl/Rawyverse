@@ -1,5 +1,5 @@
 import Swal  from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
-import { showAlert } from "../../utils/alert.js";
+import { showAlert,showAlertLoading } from "../../utils/alert.js";
 export class ItemsViews{
     constructor(controller){
         this.controller = controller
@@ -15,7 +15,7 @@ export class ItemsViews{
             try {
                
                 let formData = new FormData(form);
-                
+                showAlertLoading();
                 let response = await this.controller.addItems(formData);
                 Swal.fire({
                     "title" : "Success",
@@ -33,6 +33,7 @@ export class ItemsViews{
         form.addEventListener("submit",async(e)=>{
             e.preventDefault()
             try{
+                showAlertLoading();
                 let titleInput = document.getElementById("title-delete");
                 let response = await this.controller.deleteItems(titleInput.value);
                 Swal.fire({
