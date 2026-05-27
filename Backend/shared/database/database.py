@@ -16,7 +16,8 @@ class Database:
             minsize=5,
             maxsize=32,
             cursorclass=aiomysql.DictCursor,
-            init_command="SET time_zone = '+00:00'",
-            ssl=ssl_ctx
+            ssl=ssl_ctx,
+            init_command="SET time_zone = '+00:00'"
+            
         )
         return pool
