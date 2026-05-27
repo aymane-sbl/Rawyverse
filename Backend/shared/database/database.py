@@ -1,5 +1,6 @@
 import os
 import aiomysql
+import ssl
 from dotenv import load_dotenv
 load_dotenv(override=True)
 class Database:
