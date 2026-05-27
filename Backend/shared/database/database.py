@@ -4,7 +4,6 @@ import ssl
 from dotenv import load_dotenv
 load_dotenv(override=True)
 class Database:
-    ssl_ctx = ssl.create_default_context()
     async def create_pool(self):
         pool = await aiomysql.create_pool(
             host =os.getenv("HOST"),
@@ -16,7 +15,7 @@ class Database:
             minsize=5,
             maxsize=32,
             cursorclass=aiomysql.DictCursor,
-            ssl=ssl_ctx,
+            ssl=ssl.create_default_context(),
             init_command="SET time_zone = '+00:00'"
             
         )
