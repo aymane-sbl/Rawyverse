@@ -15,7 +15,7 @@ async def send_link(email,title,redis,jinja2):
         "verify_link":f"{os.getenv("SUBDOMAIN")}/api/v1/{title}?token={token}",
     })
     params: resend.Emails.SendParams = {
-        "from": "Acme <onboarding@resend.dev>",
+        "from": "noreply@rawyverse.xyz",
         "to": email,
         "subject": "Rawyverse",
         "html": tempalate,
