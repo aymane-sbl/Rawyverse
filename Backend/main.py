@@ -39,7 +39,8 @@ async def lifespan(app: FastAPI):
     # init language
     await set_lange_redis(redis=app.state.redis,file="ar.json")
     # init firebase
-    credential = firebase_admin.credentials.Certificate("./firebase/serviceAccountKey.json")
+    firebase_path = "/etc/secrets/serviceAccountKey.json" if os.path.exists("/etc/secrets/serviceAccountKey.json") else "./firebase/serviceAccountKey.json"
+    credential = firebase_admin.credentials.Certificate(firebase_path)
     firebase_admin.initialize_app(credential=credential)
 
     yield
