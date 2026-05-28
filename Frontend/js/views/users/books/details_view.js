@@ -57,6 +57,11 @@ export class DetailsView{
             a.textContent ="ابدأ القراءة";
             button.append(a);
             btnDiv.append(button);
+            btnDiv.addEventListener("click",(e)=>{
+              e.preventDefault()
+              let link = a.getAttribute("href");
+              window.open(link);
+           });
             // synopsi
             let synpsisText = data["synopsis"];
             synopsis.append(synpsisText);
