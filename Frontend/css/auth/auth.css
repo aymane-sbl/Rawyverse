@@ -135,7 +135,7 @@ body{
 }
 
 .register-form  .input-group p{
-    visibility: hidden;
+    display : none;
     font-size: small;
     font-weight: 700;
     color: var(--primary-accent);
