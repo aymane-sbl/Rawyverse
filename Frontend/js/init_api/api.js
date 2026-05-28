@@ -1,7 +1,7 @@
 
 
 export async function initApi(endpoints,options={method : "GET",credentials : "include",cache : "no-store"}) {
-    const baseUrl = "http://127.0.0.1:8000";
+    const baseUrl ="https://rawyverse.onrender.com";
     GlobalLoader("block");
    try{
       let response = await fetch(`${baseUrl}${endpoints}`,options);
