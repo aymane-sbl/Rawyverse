@@ -55,7 +55,7 @@ origins = [
     "http://localhost:5500",
     "http://localhost:63343",
     "http://127.0.0.1:63343",
-    "https://rawyverse.pages.dev/"
+    "https://rawyverse.pages.dev"
 ]
 
 app.add_middleware(
