@@ -117,13 +117,14 @@
             <div class="icon-container">✓</div>
             <h1>تم تفعيل حسابك بنجاح!</h1>
             <p>{{ message }}</p>
-            <a href="{{domain}}/pages/auth/login.html" class="btn">تسجيل الدخول الآن</a>
+            <a
+href="https://{{domain}}/pages/auth/login.html" class="btn">تسجيل الدخول الآن</a>
 
         {% else %}
             <div class="icon-container">✗</div>
             <h1>عذراً، فشل التفعيل</h1>
             <p>{{ message }}</p>
-            <a href="{{domain}}/pages/auth/register.html" class="btn">حاول التسجيل مجدداً</a>
+            <a href="https://{{domain}}/pages/auth/register.html" class="btn">حاول التسجيل مجدداً</a>
         {% endif %}
 
     </div>
