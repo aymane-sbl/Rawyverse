@@ -60,7 +60,7 @@ export class DetailsView{
             btnDiv.addEventListener("click",(e)=>{
               e.preventDefault()
               let link = a.getAttribute("href");
-              window.open(link);
+              window.open(link,"_blank");
            });
             // synopsi
             let synpsisText = data["synopsis"];
