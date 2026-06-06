@@ -2,7 +2,7 @@
 #loader {
   width: 50px;
   padding: 8px;
-  margin :50% auto;
+  margin :auto;
   aspect-ratio: 1;
   border-radius: 50%;
   background: red;
