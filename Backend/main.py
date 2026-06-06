@@ -33,7 +33,7 @@ async def lifespan(app: FastAPI):
     app.state.redis = redis
 #   init redis cache
     redis_cache = redis_as.from_url(os.getenv("REDIS_URL"), ssl_cert_reqs="none")
-    init_redis_cache(redis=redis, redis_backend=RedisBackend ,fast_api_cache=FastAPICache)
+    init_redis_cache(redis=redis_cache, redis_backend=RedisBackend ,fast_api_cache=FastAPICache)
 
 # init tables
     async with app.state.pool.acquire() as connection:
