@@ -2,8 +2,7 @@
 
 A comprehensive platform for discovering and managing books and novels, featuring a robust authentication system and an optimized API.
 
-**Live Website:** [rawyverse.xyz](https://rawyverse.xyz)
-**API:** [api.rawyverse.xyz](https://api.rawyverse.xyz)
+
 
 ---
 
